@@ -8,7 +8,6 @@ const BookingForm = () => {
   const [doctors, setDoctors] = useState([]);
   const [patientId, setPatientId] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-   // Retrieve role name from session storage
 
   useEffect(() => {
     fetchDoctors();
@@ -25,20 +24,15 @@ const BookingForm = () => {
 
   const selectDate = selectedDateTime 
 
-  
-  useEffect(() => {
-   handleSubmit();
-  }, []);
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
+   e.preventDefault();
     console.log(selectDate);
     console.log(selectedDoctor)
     console.log(patientId)
     const book = {
         appointmentDateTime: selectDate,
         doctorId: selectedDoctor,
-        patientId,
+        patientId
       };
     try {
       await bookAppointment(book);
@@ -54,7 +48,6 @@ const BookingForm = () => {
   const handlePatientIdChange = (e) => {  
     setPatientId(e.target.value);
   };
-
   return (
     <div className="container">
       <h2>Book Appointment</h2>

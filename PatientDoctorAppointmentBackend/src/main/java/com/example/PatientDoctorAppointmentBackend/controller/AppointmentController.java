@@ -17,7 +17,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
     @PreAuthorize("hasRole(\"PATIENT\")")
     @PostMapping("book")
-    public ResponseEntity<AppointmentDto> book(@Valid  @RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<AppointmentDto> book(  @RequestBody AppointmentDto appointmentDto) {
         AppointmentDto savedAppointment = appointmentService.bookAppointment(appointmentDto);
         return new ResponseEntity<>(savedAppointment, HttpStatus.CREATED);
     }

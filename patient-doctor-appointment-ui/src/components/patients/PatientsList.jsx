@@ -2,8 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { isDoctorUser, isPatientUser } from "../../services/AuthService";
-import { viewDoctors, viewPatients } from "../../services/ManageService";
+import { isPatientUser } from "../../services/AuthService";
+import {  viewPatients } from "../../services/ManageService";
+
+
 
 
 
@@ -12,7 +14,7 @@ const PatientsList = () => {
 
   const navigate = useNavigate();
 
-  const isDoctor = isDoctorUser();
+  const isPatient = isPatientUser();
 
   useEffect(() => {
     listPatients();

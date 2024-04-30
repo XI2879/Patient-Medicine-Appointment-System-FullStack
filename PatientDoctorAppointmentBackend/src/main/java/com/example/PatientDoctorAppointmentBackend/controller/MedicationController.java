@@ -17,7 +17,7 @@ public class MedicationController {
     private MedicationService medicationService;
     @PreAuthorize("hasRole(\"DOCTOR\")")
     @PostMapping("add")
-    public ResponseEntity<MedicationDto> addMedication(@Valid @RequestBody MedicationDto medicationDto) {
+    public ResponseEntity<MedicationDto> addMedication( @RequestBody MedicationDto medicationDto) {
         MedicationDto savedMedication = medicationService.addMedication(medicationDto);
         return new ResponseEntity<>(savedMedication, HttpStatus.CREATED);
     }

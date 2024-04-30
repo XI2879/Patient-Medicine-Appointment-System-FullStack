@@ -10,6 +10,7 @@ const PatientRegister = () => {
   const [password, setPassword] = useState("");
   const [gender,setGender] = useState("");
   const [contactNumber,setContactNumber] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
   async function handleRegistrationForm(e) {
@@ -19,11 +20,14 @@ const PatientRegister = () => {
 
     try {
       const response = await patientRegisterAPICall(register);
+      setSuccessMessage('Patient Registered successfully!');
       console.log(response.data);
-      navigate("/")
     } catch (error) {
       console.error(error);
     }
+  }
+  const backToLogin=()=>{
+    navigate("/")
   }
 
   return (
@@ -95,7 +99,7 @@ const PatientRegister = () => {
                       type="text"
                       name="gender"
                       className="form-control"
-                      placeholder="Enter password"
+                      placeholder="Enter gender"
                       value={gender}
                       onChange={(e) => setGender(e.target.value)}
                     />
@@ -108,7 +112,7 @@ const PatientRegister = () => {
                       type="text"
                       name="contactNumber"
                       className="form-control"
-                      placeholder="Enter password"
+                      placeholder="Enter contact"
                       value={contactNumber}
                       onChange={(e) => setContactNumber(e.target.value)}
                     />
@@ -122,7 +126,16 @@ const PatientRegister = () => {
                     Submit
                   </button>
                 </div>
+                <div>
+                <button
+                    className="btn btn-primary"
+                    onClick={backToLogin}
+                  >
+                    BackToLogin
+                  </button>
+                </div>
               </form>
+              {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
             </div>
           </div>
         </div>

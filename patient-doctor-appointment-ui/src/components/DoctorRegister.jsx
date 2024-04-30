@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { doctorRegisterAPICall } from "../services/AuthService";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const DoctorRegister = () => {
   const [name, setName] = useState("");
@@ -9,6 +9,8 @@ const DoctorRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [specialization,setSpecialization] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
+
   const navigate = useNavigate();
   
 
@@ -19,11 +21,15 @@ const DoctorRegister = () => {
 
     try {
       const response = await doctorRegisterAPICall(register);
+      setSuccessMessage('Doctor Registered successfully!');
       console.log(response.data);
     } catch (error) {
       console.error(error);
     }
-    navigate("/login")
+    
+  }
+  const backToLogin =()=>{
+    navigate("/")
   }
 
   return (
@@ -95,7 +101,7 @@ const DoctorRegister = () => {
                       type="text"
                       name="specialization"
                       className="form-control"
-                      placeholder="Enter password"
+                      placeholder="Enter specialization"
                       value={specialization}
                       onChange={(e) => setSpecialization(e.target.value)}
                     />
@@ -110,12 +116,22 @@ const DoctorRegister = () => {
                     Submit
                   </button>
                 </div>
+                <div className="form-group mb-3">
+                  <button
+                  className="btn btn-primary"
+                  onClick={backToLogin}>
+                    Back to Login
+                  </button>
+
+                </div>
               </form>
+              {successMessage && <div className="alert alert-success mt-3">{successMessage}</div>}
             </div>
           </div>
         </div>
       </div>
     </div>
+    
   );
 };
 
